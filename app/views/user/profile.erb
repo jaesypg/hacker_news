@@ -1,0 +1,43 @@
+<div class="container">
+  <h1>Welcome to Hacker News!</h1>
+  <p>User Profile page</p>
+
+  <!-- display user profile -->
+
+    <input type="hidden" name="_method" value="delete">
+    Name: <input type="text" name="user[name]" size="30" value="<%=@user.name%>" readonly><br>
+    Email: <input type="text" name="user[email]" size="30" value="<%=@user.email%>" readonly><br>
+    Password: <input type="password" name="user[password]" size="30" value="<%=@user.password%>" readonly><br>
+
+
+  <!-- display all the posts belonged to the user -->
+  <p>All posts created by me!</p>
+  <table>
+    <% unless @posts.nil? %>
+      <% @posts.each_with_index do |p, index| %>
+      <tr>
+      <td><%= index+1 %>. <a href="/posts/<%=p.id%>"><%= p.title %></a></td>
+      </tr>
+      <% p.comments.each do |c| %>
+      <tr><td><%= c.comment %></td></tr>
+      <% end %>
+      <% end %>
+    <% end %>
+  </table>
+
+<!-- display all the comments belonged to the user -->
+<p>All comment created by me!</p>
+  <table>
+    <% unless @comments.nil? %>
+      <% @comments.each_with_index do |c, index| %>
+      <tr>
+      <td><%= index+1 %>. <%= c.comment %></td>
+      </tr>
+      <tr><td> [ <%= c.post.title %> ] </td></tr>
+      <% end %>
+    <% end %>
+  </table>
+
+
+
+</div>

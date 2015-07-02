@@ -1,0 +1,39 @@
+
+<div class="container">
+  <h1>Welcome to Hacker News!</h1>
+
+  <div>
+    <table>
+      <tr bgcolor="#B0E0E6">
+        <td>
+          <a href="/posts/new">submit new</a>
+        </td>
+        <% if session[:name] == nil %>
+          <td>
+            <a href="/users">login</a>
+          </td>
+        <% else  %>
+          <td>
+          <a href="/users/<%=session[:id]%>">user profile</a>
+          </td>
+          <td>
+            <a href="/users/logout">logout</a>
+          </td>
+        <% end  %>
+      </tr>
+    </table>
+  </div>
+  <br><br>
+
+  <table>
+    <% unless @posts.nil? %>
+      <% @posts.each_with_index do |p, index| %>
+      <tr>
+      <td><%= index+1 %>. <a href="/posts/<%=p.id%>"><%= p.title %></a></td>
+      <td><a id="link<%=p.id%>" href="/posts" onclick="vote();">Vote!</a></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </table>
+
+</div>

@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>Welcome to Hacker News!</h1>
+
+  <div>
+    Title: <%= @post.title %><br>
+    <%= @post.created_at.strftime("%d/%m/%Y %H:%M%p") %>
+  </div><br><br>
+
+  <form action="/posts/<%=@post.id%>/comments" method="post">
+  <textarea name="comment[comment]" rows="4" cols="49"></textarea><br><br>
+  <input type="submit" value="add comment"></input>
+  </form>
+
+  <table>
+    <% unless @comments.nil? %>
+      <% @comments.each_with_index do |c, index| %>
+      <tr>
+      <td><%= c.comment %></td>
+      </tr>
+      <tr>
+      <td><%= c.created_at.strftime("%d/%m/%Y %H:%M%p") %></td>
+      </tr><br><br>
+      <% end %>
+    <% end %>
+  </table>
+</div>
